@@ -21,7 +21,7 @@ namespace FakeLogonScreen
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,7 +33,12 @@ namespace FakeLogonScreen
             string SID = string.Empty;
             try
             {
-                UserPrincipal user = UserPrincipal.Current;
+                PrincipalContext ctx = new PrincipalContext(ContextType.Machine);
+
+                UserPrincipal user = UserPrincipal.FindByIdentity(ctx,
+                                                           IdentityType.SamAccountName,
+                                                           args[0]);
+                //UserPrincipal user = UserPrincipal.Current;
                 s.Username = user.SamAccountName;
                 s.DisplayName = user.DisplayName;
                 SID = user.Sid.Value;
