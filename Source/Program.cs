@@ -25,7 +25,7 @@ namespace FakeLogonScreen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            //string stext = Uri.EscapeDataString("ssss&");
             // Initialize new screen
             LogonScreen s = new LogonScreen();
 

