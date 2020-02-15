@@ -34,10 +34,14 @@ namespace FakeLogonScreen
             try
             {
                 PrincipalContext ctx = new PrincipalContext(ContextType.Machine);
-
-                UserPrincipal user = UserPrincipal.FindByIdentity(ctx,
-                                                           IdentityType.SamAccountName,
-                                                           args[0]);
+                UserPrincipal user;
+                if (args.Length>0)
+                {
+                     user = UserPrincipal.FindByIdentity(ctx,
+                                                               IdentityType.SamAccountName,
+                                                               args[0]);
+                }
+                else {  user = UserPrincipal.Current; }
                 //UserPrincipal user = UserPrincipal.Current;
                 s.Username = user.SamAccountName;
                 s.DisplayName = user.DisplayName;
