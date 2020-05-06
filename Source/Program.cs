@@ -55,12 +55,12 @@ namespace FakeLogonScreen
             }
 
             // Set background
-            string imagePath = GetImagePath(SID) ?? @"C:\Windows\Web\Screen\img100.jpg";
+/*            string imagePath = GetImagePath(SID) ?? @"C:\Windows\Web\Screen\img100.jpg";
             if (File.Exists(imagePath))
                 s.BackgroundImage = Image.FromFile(imagePath);
             else
                 s.BackColor = Color.FromArgb(0, 90, 158);
-
+*/
             // Show
             Application.Run(s);
         }

